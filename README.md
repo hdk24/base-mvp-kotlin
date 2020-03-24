@@ -13,11 +13,11 @@ MVP Architecture with Kotlin
 
 ### Library Components:
 1. Retrofit : https://github.com/square/retrofit
-2. RoomDb : https://github.com/agrosner/DBFlow
+2. RoomDb : https://developer.android.com/jetpack/androidx/releases/room
 3. RxJava2 : https://github.com/ReactiveX/RxJava
 4. RxAndroid : https://github.com/ReactiveX/RxAndroid
 5. Koin : https://github.com/InsertKoinIO/koin
-6. AndroidX
+6. AndroidX : https://developer.android.com/jetpack/docs/getting-started
 
 ### Code Style
 1. ktlint : https://github.com/pinterest/ktlint
