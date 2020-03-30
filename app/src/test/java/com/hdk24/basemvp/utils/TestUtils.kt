@@ -1,8 +1,10 @@
 package com.hdk24.basemvp.utils
 
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.InputStreamReader
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.hdk24.basemvp.data.remote.model.MovieResponse
+import java.io.FileReader
+import java.nio.file.Paths
 
 /*
  *  Created by Hanantadk on 24/03/20.
@@ -10,16 +12,14 @@ import java.io.InputStreamReader
  *  Last modified 24/03/20.
  */
 object TestUtils {
-    fun getResponseJson(): String {
-        val assetPath = "../app/src/main/assets/"
-        val br =
-            BufferedReader(InputStreamReader(FileInputStream(assetPath + "response_success.json")))
-        val sb = StringBuilder()
-        var line = br.readLine()
-        while (line != null) {
-            sb.append(line)
-            line = br.readLine()
-        }
-        return sb.toString()
+    fun readOrders(fileName: String): MovieResponse {
+        return Gson().fromJson<MovieResponse>(
+            FileReader(Paths.get(TestUtils::class.java.getResource(fileName).toURI()).toFile()),
+            object : TypeToken<MovieResponse>() {}.type
+        )
+    }
+
+    fun readJson(fileName: String): String {
+        return FileReader(Paths.get(TestUtils::class.java.getResource(fileName).toURI()).toFile()).readText()
     }
 }

@@ -87,7 +87,7 @@ class MoviePresenterTest {
     @Test
     fun fetchMovieSuccess() {
         val testObserver = TestObserver<MovieResponse>()
-        val mockResponse = MockResponse().setBody(TestUtils.getResponseJson())
+        val mockResponse = MockResponse().setBody(TestUtils.readJson("/response.json"))
 
         server.enqueue(mockResponse)
         server.url(BuildConfig.API_URL)
@@ -100,7 +100,14 @@ class MoviePresenterTest {
 
         val serverRequest = server.takeRequest()
         assertEquals(BuildConfig.API_URL, serverRequest.path)
-        assertEquals(TestUtils.getResponseJson(), serverRequest.body.readUtf8())
+        assertEquals(TestUtils.readJson("/response.json"), serverRequest.body.readUtf8())
+    }
+
+    @Test
+    fun checkReadFile() {
+        val jsonFile = TestUtils.readJson("/response.json")
+        print(jsonFile)
+        assert(jsonFile.isNotEmpty())
     }
 
     @After
@@ -110,4 +117,5 @@ class MoviePresenterTest {
         database.close()
         server.shutdown()
     }
+
 }
